@@ -22,9 +22,21 @@ const { NotImplementedError } = require('../extensions/index.js');
  * }
  *
  */
-function getDNSStats(/* domains */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+function getDNSStats(domains ) {
+  let result = {} //должен вернуться объект
+  
+  for(let element of domains) {
+    let arr = element.split('.').reverse()
+    console.log(arr)//каждый эелемнт в объекте превращается в массив ['ru', 'yandex', 'code'] и тд
+    for(let i = 0; i < arr.length; i++) { 
+      let domain = '.' + arr.slice(0, i + 1).join('.')
+      console.log(domain)//проходимся по созданному массиву и создаем новый[.ru], [.ru.yandex], [.ru.yandex.code]
+      result[domain] = result[domain] ? result[domain] + 1 : 1//если появляеются новые домэйны в результе, то +1, если нет, то 1
+    } 
+    
+  }
+  return result
+ 
 }
 
 module.exports = {
